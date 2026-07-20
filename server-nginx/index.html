@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Docker Example Page</title>
+  <style>
+    body {
+      background: #0d1117;
+      color: #e6edf3;
+      font-family: system-ui, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      text-align: center;
+    }
+    h1 {
+      color: #58a6ff;
+      margin-bottom: 8px;
+    }
+    p {
+      color: #8b949e;
+    }
+    code {
+      background: #161b22;
+      padding: 4px 8px;
+      border-radius: 6px;
+    }
+    footer {
+      position: absolute;
+      bottom: 12px;
+      font-size: 12px;
+      color: #6e7681;
+    }
+  </style>
+</head>
+<body>
+  <h1>🚀 Docker Container Ativo</h1>
+  <p>Esta página está sendo servida a partir de um container NGINX.</p>
+  <p><code>docker run -p 8080:80 -v $(pwd)/index.html:/usr/share/nginx/html/index.html:ro nginx</code></p>
+  <footer>Single-file HTML — ideal para exemplos de Docker e Compose</footer>
+</body>
+</html>
+

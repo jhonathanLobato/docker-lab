@@ -1,0 +1,1 @@
+docker run -v /home/scoli-suporte/projetos/estudo-docker/server-nginx/index.html:/usr/share/nginx/html/index.html:ro -d -p 8080:80 --name servidor-web nginx
