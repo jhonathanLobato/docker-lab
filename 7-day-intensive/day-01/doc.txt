@@ -1,0 +1,31 @@
+Foi encontrado que API em python precisa de apenas do Flask para funcionar.
+-- A versão do flask para ser instalada está no arquivo requitements.txt
+-- Flask 3.1.3
+
+Passos necessarios:
+-- instalar o venv
+-- Instalar a biblioteca
+
+Para rodar o projeto basta usar o comando
+- source venv/bin/activate
+- python main.py
+
+-----------------------
+Criando o container:
+A criação do container foi simples, não houve muitos problemas, tive que ler algumas documentação pessoas para lembrar cada instrução e argumento.
+
+Dificuldade:
+Minha principal dificuldade foi com a rede, eu ainda não tinha o dominio da logica em que os container funcionam, coloquei apenas o EXPOSE achando que era suficiente
+para abrir uma conexão entre a porta do host com a do container(o que era o principal problema), para resolver eu tive que buscar alguns documentos sobre e resolvi 
+compilar e colocar na minha documentação pessoal sobre o assunto de como funciona as redes internas e externa do Docker.
+No fim, o problema era simples e acabou sendo resolvido rápido usei o ( -p 5000:5000 ), de inicio parece um erro bobo, mas me fez pesquisar sobre o motivo de precisar
+utilizar a flag com as portas ao invés de só decorar o comando direto.
+
+
+Perguntas de Arquitetura
+- Por que um Dockerfile possui instruções em ordem?
+- Por que existe build?
+- Por que não executar código diretamente?
+- Qual diferença entre imagem e container?
+- Por que uma imagem é imutável?
+- O que acontece quando altero apenas um arquivo?

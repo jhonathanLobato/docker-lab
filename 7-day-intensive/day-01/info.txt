@@ -1,0 +1,278 @@
+Dia 01 — Pensando como o Docker pensa
+Objetivo
+
+Neste primeiro dia você deverá abandonar a ideia de que Docker é apenas uma ferramenta que executa comandos.
+Ao final do dia você deverá compreender:
+
+O que realmente é uma imagem.
+O que realmente é um container.
+Como um Dockerfile é executado.
+Como funciona o Build Cache.
+Como reduzir tempo de build.
+Como organizar um Dockerfile profissional.
+Como investigar um container.
+
+Você não deverá decorar comandos.
+Você deverá compreender por que cada instrução existe.
+
+Cenário
+Você acabou de ser contratado como DevOps Cloud Engineer.
+A equipe de desenvolvimento criou uma API em Python.
+Ela funciona perfeitamente.
+
+O problema é que cada desenvolvedor precisa instalar:
+Python
+pip
+Dependências
+Variáveis
+Configurações locais
+
+Cada notebook funciona de um jeito.
+
+Cada máquina possui uma versão diferente do Python.
+
+O Tech Lead diz:
+"Nunca mais quero ouvir alguém dizer 'na minha máquina funciona'."
+Sua missão é resolver esse problema utilizando Docker.
+
+Regras
+Durante todo o desafio você NÃO pode:
+Copiar Dockerfiles prontos.
+Copiar docker-compose.yml da internet.
+Utilizar IA para gerar a solução.
+Assistir vídeos ensinando exatamente o projeto.
+
+Você pode utilizar:
+Documentação oficial do Docker.
+Documentação oficial da linguagem.
+Stack Overflow.
+Artigos técnicos.
+Experimentação.
+
+Projeto
+Crie uma pequena API em Python.
+Ela deve possuir:
+endpoint /
+endpoint /health
+endpoint /users
+
+Não importa o framework.
+Pode ser:
+Flask
+FastAPI
+
+Parte 1 — Sem Docker
+Execute a aplicação normalmente.
+
+Observe.
+Faça uma lista.
+Quais dependências foram necessárias?
+Quantos passos foram necessários?
+O que outra pessoa precisaria fazer para executar o projeto?
+Documente tudo.
+
+Parte 2 — Primeira Containerização
+Agora tente colocar essa aplicação dentro de um container.
+Sem procurar Dockerfiles prontos.
+Você deverá tomar decisões.
+
+Por exemplo:
+Qual imagem utilizar?
+Qual versão?
+Debian?
+Slim?
+Alpine?
+
+Você deverá criar:
+Dockerfile
+E somente ele.
+Ainda NÃO utilize Compose.
+
+Investigação 1
+Depois de conseguir executar a aplicação.
+
+Responda.
+Pergunta 1
+Por que você escolheu essa imagem?
+Pergunta 2
+Por que não escolheu Ubuntu?
+Pergunta 3
+Por que não escolheu Debian completo?
+Pergunta 4
+Por que não escolheu Alpine?
+Pergunta 5
+Quanto pesa sua imagem?
+Pergunta 6
+Esse tamanho faz sentido?
+
+Investigação 2 — Ordem das instruções
+Agora começa o aprendizado de verdade.
+Altere a ordem das instruções do Dockerfile.
+Faça vários builds.
+
+Observe.
+Cronometre.
+
+Responda:
+Por que alguns builds são muito rápidos?
+Por que alguns são extremamente lentos?
+
+Investigação 3 — Build Cache
+Descubra sozinho:
+O que é Build Cache?
+Como ele funciona?
+Quando ele é invalidado?
+Quais instruções aproveitam cache?
+Quais não aproveitam?
+
+Experimento obrigatório.
+Faça um build.
+Depois altere:
+Uma linha da aplicação.
+Build novamente.
+Observe.
+Depois altere:
+
+requirements.txt
+Build novamente.
+Explique por quê.
+
+Investigação 4 — Camadas (Layers)
+Agora você deve responder.
+Cada instrução do Dockerfile cria uma camada?
+Todas?
+Algumas?
+Como verificar?
+O que acontece quando uma camada muda?
+
+Investigação 5 — Dentro do container
+Entre no container.
+Explore.
+Descubra:
+Onde sua aplicação está?
+Onde Python está instalado?
+Quem é o usuário atual?
+Qual o diretório inicial?
+Quais processos estão rodando?
+
+Depois responda.
+Container é uma máquina virtual?
+Se não for...
+O que ele realmente é?
+
+Investigação 6 — Docker History
+Utilize:
+docker history
+Agora tente responder.
+Por que essa ferramenta existe?
+Quando ela seria útil?
+
+Investigação 7 — Docker Inspect
+Agora utilize:
+docker inspect
+Descubra:
+IP
+Variáveis
+Volumes
+Mounts
+Network
+Image ID
+
+Depois responda.
+Por que Docker armazena tudo isso?
+Desafio de Arquitetura
+Imagine que essa aplicação será utilizada por:
+
+500 desenvolvedores.
+
+O build demora:
+
+5 minutos.
+
+Seu gerente pergunta.
+
+"Tem como diminuir para 30 segundos?"
+
+Você ainda não precisa saber fazer.
+
+Mas precisa propor hipóteses.
+
+Escreva pelo menos cinco ideias.
+
+Missão Extra 1
+
+Troque completamente a imagem base.
+
+Exemplo:
+
+python:3.12
+
+↓
+
+python:3.12-slim
+
+↓
+
+Outra.
+
+Compare.
+
+Tempo de build
+Tamanho
+Facilidade
+Missão Extra 2
+
+Crie um Dockerfile horrível.
+
+Faça tudo errado.
+
+Depois explique.
+
+Por que ficou ruim?
+
+Essa atividade ensina tanto quanto criar um Dockerfile bom.
+
+Missão Extra 3
+Crie um .dockerignore.
+Depois descubra.
+Por que ele existe?
+O que acontece sem ele?
+Documentação
+Ao terminar, crie um documento contendo:
+Arquitetura
+Como sua solução funciona?
+Decisões
+Por que escolheu cada tecnologia?
+Problemas encontrados
+Liste todos.
+Inclusive os que você resolveu.
+Lições aprendidas
+Escreva tudo que descobriu.
+Dúvidas
+Liste perguntas que ainda não sabe responder.
+Critérios de aprovação
+
+Você concluiu o Dia 1 quando conseguir responder, sem consultar materiais:
+O que é uma imagem?
+O que é um container?
+Como o Docker constrói uma imagem?
+O que é uma layer?
+Como funciona o Build Cache?
+Por que a ordem do Dockerfile importa?
+Quando o cache é invalidado?
+Por que existe .dockerignore?
+O que diferencia um container de uma máquina virtual?
+Como inspecionar um container em execução?
+Como investigar uma imagem Docker?
+Entrega Final
+
+Quando terminar, envie para revisão como se fosse um Pull Request:
+
+Dockerfile
+Código da API
+Estrutura do projeto
+Documentação
+Respostas das perguntas
+Decisões arquiteturais
+
+Eu vou revisar como um Tech Lead faria em uma empresa: analisando arquitetura, desempenho, segurança, legibilidade, boas práticas e justificativas. O foco da revisão não será apenas dizer "está funcionando", mas mostrar como um DevOps experiente pensa ao avaliar uma solução.
