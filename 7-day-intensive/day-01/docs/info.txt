@@ -1,53 +1,44 @@
 Dia 01 — Pensando como o Docker pensa
+
 Objetivo
-
 Neste primeiro dia você deverá abandonar a ideia de que Docker é apenas uma ferramenta que executa comandos.
+
 Ao final do dia você deverá compreender:
-
-O que realmente é uma imagem.
-O que realmente é um container.
-Como um Dockerfile é executado.
-Como funciona o Build Cache.
-Como reduzir tempo de build.
-Como organizar um Dockerfile profissional.
-Como investigar um container.
-
-Você não deverá decorar comandos.
-Você deverá compreender por que cada instrução existe.
+- O que realmente é uma imagem.
+- O que realmente é um container.
+- Como um Dockerfile é executado.
+- Como funciona o Build Cache.
+- Como reduzir tempo de build.
+- Como organizar um Dockerfile profissional.
+- Como investigar um container.
 
 Cenário
-Você acabou de ser contratado como DevOps Cloud Engineer.
-A equipe de desenvolvimento criou uma API em Python.
-Ela funciona perfeitamente.
+Você acabou de ser contratado como DevOps Cloud Engineer. A equipe de desenvolvimento criou uma API em Python.
 
 O problema é que cada desenvolvedor precisa instalar:
-Python
-pip
-Dependências
-Variáveis
-Configurações locais
-
-Cada notebook funciona de um jeito.
-
-Cada máquina possui uma versão diferente do Python.
+- Python
+- pip
+- Dependências
+- Variáveis
+- Configurações locais
 
 O Tech Lead diz:
 "Nunca mais quero ouvir alguém dizer 'na minha máquina funciona'."
 Sua missão é resolver esse problema utilizando Docker.
 
-Regras
+Regras:
 Durante todo o desafio você NÃO pode:
-Copiar Dockerfiles prontos.
-Copiar docker-compose.yml da internet.
-Utilizar IA para gerar a solução.
-Assistir vídeos ensinando exatamente o projeto.
+- Copiar Dockerfiles prontos.
+- Copiar docker-compose.yml da internet.
+- Utilizar IA para gerar a solução.
+- Assistir vídeos ensinando exatamente o projeto.
 
 Você pode utilizar:
-Documentação oficial do Docker.
-Documentação oficial da linguagem.
-Stack Overflow.
-Artigos técnicos.
-Experimentação.
+- Documentação oficial do Docker.
+- Documentação oficial da linguagem.
+- Stack Overflow.
+- Artigos técnicos.
+- Experimentação.
 
 Projeto
 Crie uma pequena API em Python.
@@ -55,11 +46,6 @@ Ela deve possuir:
 endpoint /
 endpoint /health
 endpoint /users
-
-Não importa o framework.
-Pode ser:
-Flask
-FastAPI
 
 Parte 1 — Sem Docker
 Execute a aplicação normalmente.
@@ -77,16 +63,15 @@ Sem procurar Dockerfiles prontos.
 Você deverá tomar decisões.
 
 Por exemplo:
-Qual imagem utilizar?
-Qual versão?
-Debian?
-Slim?
-Alpine?
+- Qual imagem utilizar?
+- Qual versão?
+- Debian?
+- Slim?
+- Alpine?
 
 Você deverá criar:
-Dockerfile
-E somente ele.
-Ainda NÃO utilize Compose.
+- Dockerfil
+- Ainda NÃO utilize Compose.
 
 Investigação 1
 Depois de conseguir executar a aplicação.
@@ -105,10 +90,9 @@ Quanto pesa sua imagem?
 Pergunta 6
 Esse tamanho faz sentido?
 
+
 Investigação 2 — Ordem das instruções
-Agora começa o aprendizado de verdade.
-Altere a ordem das instruções do Dockerfile.
-Faça vários builds.
+Agora começa o aprendizado de verdade. Altere a ordem das instruções do Dockerfile. Faça vários builds.
 
 Observe.
 Cronometre.

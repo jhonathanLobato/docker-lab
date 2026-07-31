@@ -1,0 +1,75 @@
+Foi encontrado que API em python precisa de apenas do Flask para funcionar.
+-- A versão do flask para ser instalada está no arquivo requitements.txt
+-- Flask 3.1.3
+
+Passos necessarios:
+-- instalar o venv
+-- Instalar a biblioteca
+
+Para rodar o projeto basta usar o comando
+- source venv/bin/activate
+- python main.py
+
+-----------------------
+Criando o container:
+A criação do container foi simples, não houve muitos problemas, tive que ler algumas documentação pessoas para lembrar cada instrução e argumento.
+
+Dificuldade:
+Minha principal dificuldade foi com a rede, eu ainda não tinha o dominio da logica em que os container funcionam, coloquei apenas o EXPOSE achando que era suficiente
+para abrir uma conexão entre a porta do host com a do container(o que era o principal problema), para resolver eu tive que buscar alguns documentos sobre e resolvi 
+compilar e colocar na minha documentação pessoal sobre o assunto de como funciona as redes internas e externa do Docker.
+No fim, o problema era simples e acabou sendo resolvido rápido usei o ( -p 5000:5000 ), de inicio parece um erro bobo, mas me fez pesquisar sobre o motivo de precisar
+utilizar a flag com as portas ao invés de só decorar o comando direto.
+
+------------------------------
+Diagnosticos:
+Comparando alguns tipos de imagens que é a completa(normal), slim e alpine:
+
+IMAGEM NA VERSÃO NORMAL:
+[+] Building 40.7s (11/11) FINISHED
+IMAGE                         ID             DISK USAGE   CONTENT SIZE   EXTRA
+docker-dia-um-normal:latest   0df0dc98d01d       1.13GB             0B
+
+IMAGEM NA VERSÃO SLIM:
+[+] Building 1.1s (11/11) FINISHED
+IMAGE                       ID             DISK USAGE   CONTENT SIZE   EXTRA
+docker-dia-um-slim:latest   bbe9ed5c8800        142MB             0B    U
+
+IMAGEM NA VERSÃO ALPINE:
+[+] Building 12.1s (11/11) FINISHED
+IMAGE                         ID             DISK USAGE   CONTENT SIZE   EXTRA
+docker-dia-um-alpine:latest   590dde0c30e6       69.1MB             0B    U
+
+Como foi mostrado, existem tipos de imagens e eu resolvi testar cada uma delas para saber a diferença.
+- As imagens normal contém um sistema operacional linux(como ubuntu ou debian) completo e rodando por baixo,
+elas possuem um sistema de arquivos mais completo.
+- Imagens slim são mais compactas e levem possuem menos arquivos de inicialização e dependencias que a versão normal, 
+o que torna essa imagem mais leve.
+- Nas imagens alpine elas são ainda mais leves e possuem menos arquivos importantes do que as demais versões.
+
+Cada tipo de imagem tem sua função e pontos positivos e negativos, a definição de melhor ou pior deve ser feita
+analisando o projeto em si. As imagens alpine, por exemplo, podem apresentar mais erros do que as outras versões
+isso porque ela possue menos arquivos de configuração instaladas em suas dependencias.
+No geral, é importante analisar todas as opções para não usar algo muito pesado ou algo que apresente muitos erros.
+
+------------------------------
+Perguntas de Arquitetura
+- Por que um Dockerfile possui instruções em ordem?
+O docker executar cada instrução em ordem linha a linha, então as instruções e comandos devem ser escritos na ordem correta. um exemplo, a instrução FROM deve
+ser o primeiro no arquivo(exceto por um ARG) já que ele é a base para saber qual imagem o ambiente deve iniciar, e depois definir diretorios de trabalho e runs.
+
+- Por que não executar código diretamente?
+
+
+- Qual diferença entre imagem e container?
+O container é uma instancia em execução de um modelo, e a imagem é um modelo estático. Uma analogia é a imagem sendo uma receita de bolo e o container
+sendo o bolo já feito. A imagem é um arquivo que contém as bibliotecas, dependências e arquivos que o container precisa executar. Essa é a ideia de isolamento
+
+- Por que uma imagem é imutável?
+As imagens são imuntaveis porque a configuração que é passada no arquivo são executados e no momento é criado, depois disso a imagem se torna apenas de leitura
+
+- O que acontece quando altero apenas um arquivo?
+Nada acontece, se você mudar um arquivo é necessário criar uma nova imagem para essas alterações valerem.
+
+------------------------------
+
