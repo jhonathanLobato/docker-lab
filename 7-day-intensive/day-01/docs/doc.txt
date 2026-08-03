@@ -36,7 +36,7 @@ IMAGE                       ID             DISK USAGE   CONTENT SIZE   EXTRA
 docker-dia-um-slim:latest   bbe9ed5c8800        142MB             0B    U
 
 IMAGEM NA VERSÃO ALPINE:
-[+] Building 12.1s (11/11) FINISHED
+[+] Building 1.8s (11/11) FINISHED
 IMAGE                         ID             DISK USAGE   CONTENT SIZE   EXTRA
 docker-dia-um-alpine:latest   590dde0c30e6       69.1MB             0B    U
 

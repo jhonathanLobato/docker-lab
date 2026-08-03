@@ -1,0 +1,72 @@
+A imagem é um modelo imutável, como uma receita de bolo ou uma fotografia de um sistema de arquivos em um determinado momento. Ela contém tudo o que é necessário para executar uma aplicação — sistema operacional, bibliotecas, dependências, código e configurações —, mas por si só não faz nada acontecer.
+O container é a imagem em execução. Quando você executa docker run, o Docker cria um container a partir da imagem, adiciona uma camada de escrita (Writable Layer) e inicia um processo dentro desse ambiente isolado. É nesse momento que a aplicação realmente passa a funcionar.
+
+
+Writable Layer: A Writable Layer é a camada temporária criada pelo Docker quando um container é iniciado. Ela armazena todas as alterações feitas durante a execução, como criar, modificar ou excluir arquivos, sem alterar a imagem original, que permanece imutável. Quando o container é removido, essa camada também é descartada, fazendo com que todas essas alterações sejam perdidas, a menos que os dados tenham sido armazenados em um volume.
+
+Uma Layer é uma camada imutável que representa uma alteração no sistema de arquivos de uma imagem Docker. Cada instrução do Dockerfile, como FROM, RUN ou COPY, cria uma nova layer contendo apenas as mudanças realizadas naquela etapa. Ao empilhar todas essas camadas, o Docker forma a imagem final, podendo reutilizá-las em builds futuros para economizar tempo e espaço de armazenamento. 
+Existem as writable layer que são camadas de escrita e as read-only que são as de somente leitura, que são as camadas da imagem criadas pelo dockerfile.
+
+Exemplo de camadas:
+| ──────────────
+| Projeto
+| ──────────────
+| Python
+| ──────────────
+| Ubuntu
+| ──────────────
+
+Exemplo de camadas com o writable layer:
+| ──────────────────────────
+| Arquivos do Container(Writable Layer)
+| ──────────────────────────
+| Projeto
+| ──────────────────────────
+| Python
+| ──────────────────────────
+| Ubuntu
+| ──────────────────────────
+
+A resposta é que o Docker coloca uma nova folha sobre todas as outras. Essa folha pertence exclusivamente ao container.
+Tudo o que você altera durante a execução fica nela. Nada modifica a imagem original.
+
+Cada instrução é uma nova camada no docker?
+Nem toda instrução do Dockerfile gera uma layer de sistema de arquivos. Podemos dividir as instruções em dois grupos:
+
+Instruções que normalmente criam layers
+- RUN
+- COPY
+- ADD
+E, em alguns casos, WORKDIR, caso precise criar diretórios.
+
+Instruções que alteram apenas metadados
+- CMD
+- ENTRYPOINT
+- ENV
+- EXPOSE
+- LABEL
+- USER
+- STOPSIGNAL
+- SHELL
+Essas configuram como a imagem deve se comportar, mas não necessariamente modificam o sistema de arquivos.
+
+Exemplo:
+FROM python:3.13-slim      ← usa layers existentes da imagem base
+WORKDIR app/               ← layer
+RUN python -m venv ...     ← layer
+COPY requirements.txt .    ← layer
+RUN pip install ...        ← layer
+COPY . .                   ← layer
+CMD [...]                  ← metadado (não adiciona arquivos)
+
+
+Isso explica o motivo das imagens serem imutáveis, para o docker ser reutilizado e ser idempotente ele não pode sofrer alteração.
+Dividir as imagens em camadas faz com que o processo de criação delas sejam mais organizados e principalmente mais leves, a primeira
+vista as imagens são um conjunto de camadas e essa ideia é para cumprir alguns requisitos.
+Uma imagem python:3.13-slim tem o tamanho de 250MB e alguns altera uma linha de um arquivo, sem as layer ele iria carregar toda a 
+imagem novamente apenas para atualizar essa unica linha de um arquivo. As layers guardam apenas as mudanças, sempre que precisar de mudanças
+
+
+
+
+
