@@ -1,0 +1,74 @@
+
+
+Quando o Docker cria um container, ele cria praticamente um "mini computador".
+Ele possui:
+- seu próprio sistema de arquivos;
+- seus próprios processos;
+- sua própria interface de rede;
+- seu próprio endereço IP.
+
+Arquitetura do docker no sistema:
+                 Host
++------------------------------------------+
+           Docker Engine
+      +----------------------+
+      |     Container A      |
+      |                      |
+      |  IP: 172.17.0.2      |
+      |                      |
+      +----------------------+
+      +----------------------+
+      |     Container B      |
+      |                      |
+      |  IP: 172.17.0.3      |
+      |                      |
+      +----------------------+
++------------------------------------------+
+
+Ao executar um container, o Docker o conecta automaticamente à rede padrão chamada bridge, caso nenhuma outra rede seja especificada
+Uma bridge (ponte) liga dois lados diferentes. No caso do docker ela cria uma ponte entre containers e/ou para o host.
+Ela funciona como um pequeno switch virtual.
+
+O container precisa estar conectados em uma rede padrão para se comuncar com os outros containers e com o mundo exterior.
+Caso ela não existesse, a troca de informações não seria possivel, não teria conexão externa e o usuario local não iria conseguir 
+acesso a nada de dentro do container.
+
+Embora a rede bridge seja suficiente para ambientes simples, ela não é a melhor escolha para aplicações maiores. O principal motivo 
+não é desempenho, mas organização, isolamento e segurança. A medida que a infraestrutura cresce o sistema de comunicação entre os 
+containers devem ser repensados, imagine um prédio com um unico corredor, todos os apartamentos estão lá mas fica dificil de 
+organizar e pode ser que ocorra problemas de segurança, todos os inquelinos tem acesso aos apartamentos. para resolver esse
+problema é necessário criar redes para isolar os containe entre sí de maneira que eles se comuniquem somente com os que devem,
+no exemplo do prédio, agora os apartamentos são isolados por blocos(bloco a - 101, 102, 103. bloco b - 201, 202, 203).
+
+Para descobrir informações sobre o container usasse o comando "docker inspect <nome do container>", com ele é possivel descobrir 
+em qual rede o container está conectado.
+
+Para descobrir quais containers estão conectados a uma rede usasse o comando "docker network inspect <nome da rede>", mas ele também
+serve para analisar uma rede e saber mais informações sobre ela.
+
+
+Normalmente a distribuição dos IPs é feita pelo DHCP, mas aqui quem fornece os ips é o próprio Docker Enginer, ao criar uma rede o Docker reserva automaticamente uma faixa de endereços.
+Algo parecido com:
+Rede backend
+ - 172.20.0.0/16
+Isso significa:
+ - 172.20.0.1
+ - 172.20.0.2
+ - 172.20.0.3
+  ...
+ - 172.20.255.254
+
+Ao associar um container em uma rede o Docker simplesmente pega o primeiro IP livre.
+Ele possui um "gerenciador de IPs" (IP Address Management - IPAM) que controla quais endereços estão livres e quais já estão em uso.
+
+Visualmente:
+IPAM
+- 172.20.0.2  ✔ ocupado
+- 172.20.0.3  ✔ ocupado
+- 172.20.0.4  livre
+- 172.20.0.5  livre
+
+
+
+
+

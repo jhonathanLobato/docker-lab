@@ -17,7 +17,6 @@ MESSAGES = [
     }
 ]
 
-
 @app.get("/")
 def home():
     return jsonify({
@@ -25,18 +24,15 @@ def home():
         "status": "running"
     })
 
-
 @app.get("/health")
 def health():
     return jsonify({
         "status": "healthy"
     })
 
-
 @app.get("/messages")
 def messages():
     return jsonify(MESSAGES)
 
-
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=5050, debug=True)
