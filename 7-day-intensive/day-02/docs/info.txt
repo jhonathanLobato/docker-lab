@@ -67,6 +67,55 @@ Uma imagem python:3.13-slim tem o tamanho de 250MB e alguns altera uma linha de 
 imagem novamente apenas para atualizar essa unica linha de um arquivo. As layers guardam apenas as mudanças, sempre que precisar de mudanças
 
 
+Bind Mount serve para proteger os dados gerados e produzidos durante o funcionamento de um container, como eu já escrevi, o container
+cria uma nova camada para escrever dados, mas ao parar ou excluir esse container os dados são apagados, pensando nisso o bind mount surgiu para
+preservar os dados.
+o container passa apontar para um host local com os dados que precisam ser preservados
+
+Container - /app
+↓
+Host - /home/jhonathan/projeto
+
+Outro cenario é usar isso em banco de dados, caso você não use o bind mount, ao finalizar o container o banco de dados é excluido com a camada de escrita
+Com ele é possivel fazer alteraçoes no arquivo sem precisar lançar um novo build e run em toda nova alteração, isso acontece porque o container
+passa apontar para o host separado dele, quando se usa o copy e leva esse arquivo ele não é alterado sem antes fazer um novo build.
+
+No build é normal, mas ao fazer o run ele tem uma diferença
+- docker run -p 5000:5000 -v $(pwd):/app docker-dia-dois
 
 
+Um Volume é um espaço de armazenamento gerenciado pelo próprio Docker. Quando dizemos que o Volume é gerenciado pelo Docker, significa que 
+não somos nós que escolhemos um diretório do sistema operacional. Quem decide onde esses dados serão armazenados é o Docker.
+Com o bind mount você decide, no volume não.
+Se você utilizar um Bind Mount apontando para um caminho específico, sua aplicação passa a depender da estrutura de diretórios daquele servidor.
+Criando um volume:
+docker volume create nome-do-volume
 
+Associando o volume ao container:
+docker run -d --name meu_containe -v nome-do-volume:/caminho/no/container image
+
+Testes:
+labdevops@DESKTOP-K381ATQ:~/docker/7-day-intensive/day-02$ curl -X POST http://localhost:5000/messages \
+    -H "Content-Type: application/json" \
+    -d '{"text":"Minha primeira mensagem"}'
+    {"created_at":"2026-08-04T00:54:39.987745","id":1,"text":"Minha primeira mensagem"}
+
+labdevops@DESKTOP-K381ATQ:~/docker/7-day-intensive/day-02$ curl -X POST http://localhost:5000/messages
+    -H "Content-Type: application/json"
+    -d '{"text":"Minha segunda mensagem"}'
+    {"created_at":"2026-08-04T00:55:20.884953","id":2,"text":"Minha segunda mensagem"}
+
+Removi o container e crie outro associando ele ao volume, resultado positivo.
+http://localhost:5000/messages
+[
+  {
+    "created_at": "2026-08-04T00:54:39.987745",
+    "id": 1,
+    "text": "Minha primeira mensagem"
+  },
+  {
+    "created_at": "2026-08-04T00:55:20.884953",
+    "id": 2,
+    "text": "Minha segunda mensagem"
+  }
+]
