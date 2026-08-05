@@ -1,0 +1,50 @@
+Docker Compose é uma ferramenta que permite descrever toda a infraestrutura de uma aplicação em um único arquivo.
+No dia 3 tive uma dificuldade em ter que criar a imagem para os dois serviços, rodar ambas e criar uma rede do zero.
+O docker compose é perfeito para quando a infraestrutura precisa de muitos containers e serviços com configurações especificas para cada coisa.
+
+
+------
+Etapa 1 - Quais serviços existem?
+serviços usados na infraestrutura.
+- notificacao
+- api
+
+Etapa 2 - Cada serviço vem de onde?
+Esse serviço já possui uma imagem pronta?
+sim, imagem. não, build no dockerfile
+
+Etapa 3 - O serviço precisa conversar com alguém?
+Frontend -> API -> Postgres
+Então ambos precisam estar na mesma rede. Você já descobriu as networks.
+
+Etapa 4 - Algum dado precisa sobreviver?
+Se sim, então será necessário configurar um volume
+
+Etapa 5 - Preciso acessar esse serviço do meu computador?
+Se sim, então é necessário ter portas configurado
+
+Etapa 6 - Existe alguma configuração?
+API normalmente precisa de:
+DB_HOST
+DB_PORT
+DB_USER
+SECRET_KEY
+
+Então precisa do:
+environment:
+------
+
+1. Quais serviços existem?
+2. Cada serviço vem de onde?
+(image ou build?)
+3. Quem conversa com quem?
+(network)
+4. Quem precisa guardar dados?
+(volume)
+5. Quem precisa ser acessado pelo host?
+(ports)
+6. Quem precisa de configuração?
+(environment)
+7. Quem depende de quem?
+(depends_on)
+

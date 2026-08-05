@@ -1,0 +1,29 @@
+version: '1.0'
+
+services:
+  api:
+    container_name: api
+    build:
+      context: ./api
+      dockerfile: Dockerfile.api
+    ports:
+      - "5000:5000"
+    networks:
+      - backend
+      - notificacao
+
+  notifications:
+    container_name: notificacao
+    build:
+      context: ./notificacao
+      dockerfile: Dockerfile.notificacao
+    ports:
+      - "5050:5050"
+    networks:
+      - backend
+      - notificacao
+
+networks:
+  backend:
+  notificacao:
+    name: notificacao

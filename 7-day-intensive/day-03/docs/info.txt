@@ -69,6 +69,24 @@ IPAM
 - 172.20.0.5  livre
 
 
+Em uma rede tradicional, para que um computador consiga se comunicar com outro, é necessário conhecer seu endereço IP. O mesmo princípio se 
+aplica aos containers. Entretanto, como os endereços IP atribuídos pelo Docker podem mudar sempre que um container é recriado, utilizá-los 
+diretamente não é uma boa prática. Para resolver esse problema, o Docker possui um servidor DNS interno, responsável por traduzir o nome de 
+um container ou serviço para o seu respectivo endereço IP.
 
+Sempre que um container é conectado a uma rede definida pelo usuário (como as redes criadas pelo Docker Compose), o Docker registra automaticamente
+seu nome nesse servidor DNS. Quando outro container tenta se comunicar utilizando esse nome, o Docker consulta o DNS interno, descobre qual é o 
+endereço IP correspondente e encaminha a comunicação para o destino correto. Todo esse processo acontece de forma transparente, sem que a aplicação 
+precise conhecer ou gerenciar os endereços IP dos containers.
+
+Por exemplo, suponha que exista uma aplicação chamada api e um banco de dados chamado redis, ambos conectados à mesma rede. Em vez de configurar a 
+aplicação para acessar o Redis pelo endereço 172.20.0.3, basta utilizar o nome redis. Quando a aplicação realiza uma conexão para redis:6379, o Docker 
+consulta seu DNS interno, identifica o endereço IP atual do container Redis e estabelece a comunicação. Caso o container seja removido e criado 
+novamente, recebendo um novo IP, a aplicação continuará funcionando normalmente, pois o nome redis permanecerá o mesmo e o DNS será atualizado automaticamente.
+
+Esse mecanismo é conhecido como resolução de nomes (name resolution) e é um dos principais motivos pelos quais, em aplicações Dockerizadas,
+recomenda-se sempre utilizar o nome do container ou nome do serviço em vez de endereços IP fixos. Além de tornar a configuração mais simples,
+essa abordagem deixa a aplicação mais resiliente e facilita a manutenção da infraestrutura, já que alterações de IP não exigem mudanças no código
+ou nos arquivos de configuração.
 
 
