@@ -1,0 +1,248 @@
+Imagem padrão do docker:
+IMAGE             ID             DISK USAGE   CONTENT SIZE   EXTRA
+diacinco:latest   bc0190d8159c       1.13GB             0B
+
+Construindo a imagem:
+docker build -t diacinco .
+[+] Building 2.7s (4/10)                                                                                              docker:default
+ => [internal] load build definition from Dockerfile                                                                            0.0s
+ => => transferring dockerfile: 208B                                                                                            0.0s
+ => [internal] load metadata for docker.io/library/python:3.13                                                                  0.9s
+ => [internal] load .dockerignore                                                                                               0.0s
+ => => transferring context: 2B                                                                                                 0.0s
+ => [1/6] FROM docker.io/library/python:3.13@sha256:36f5673ec01bd1001d7cbb8f12215101aa4ee5d70ddbbb72e01b2930d7c12f19            1.7s
+ => => resolve docker.io/library/python:3.13@sha256:36f5673ec01bd1001d7cbb8f12215101aa4ee5d70ddbbb72e01b2930d7c12f19            0.1s
+[+] Building 32.5s (11/11) FINISHED                                                                                                                                          docker:default
+ => [internal] load build definition from Dockerfile                                                                                                                                   0.0s
+ => => transferring dockerfile: 208B                                                                                                                                                   0.0s
+ => [internal] load metadata for docker.io/library/python:3.13                                                                                                                         0.9s
+ => [internal] load .dockerignore                                                                                                                                                      0.0s
+ => => transferring context: 2B                                                                                                                                                        0.0s
+ => [1/6] FROM docker.io/library/python:3.13@sha256:36f5673ec01bd1001d7cbb8f12215101aa4ee5d70ddbbb72e01b2930d7c12f19                                                                  22.9s
+ => => resolve docker.io/library/python:3.13@sha256:36f5673ec01bd1001d7cbb8f12215101aa4ee5d70ddbbb72e01b2930d7c12f19                                                                   0.1s
+ => => sha256:36f5673ec01bd1001d7cbb8f12215101aa4ee5d70ddbbb72e01b2930d7c12f19 10.96kB / 10.96kB                                                                                       0.0s
+ => => sha256:af4f58cdba6e5c0fc8dfb47c14a496cf081a54d96825df6487a1cea57aee5768 6.38kB / 6.38kB                                                                                         0.0s
+ => => sha256:1da3cb2f93f2ca3c5bdaf4c024a7f1ebd717938d20c858e4be4b9aa81fc8608c 49.31MB / 49.31MB                                                                                       4.3s
+ => => sha256:a47000be7a753011cacba344e0b2a823b88d36d8377daaa34d1f90df8894c32d 2.32kB / 2.32kB                                                                                         0.0s
+ => => sha256:68b64c51cda3d04397bcf5742a29a9a1ba7adcfd18a376bacb8d114ed64cbd5a 25.64MB / 25.64MB                                                                                       2.7s
+ => => sha256:ec935196e6a095bdd6ac865248321ea4fd33424071fe14264cd33900f8ae6212 67.80MB / 67.80MB                                                                                       6.8s
+ => => sha256:d74736caedd40737be802d27bfe1d5d0e10377ddb1c7b4103391e0bbff5152e0 236.32MB / 236.32MB                                                                                    13.5s
+ => => sha256:dd4663c0efc39e4301854b842a573355e5a2e8a1c03af208943aa6fbc5550b56 6.10MB / 6.10MB                                                                                         5.2s
+ => => extracting sha256:1da3cb2f93f2ca3c5bdaf4c024a7f1ebd717938d20c858e4be4b9aa81fc8608c                                                                                              1.8s
+ => => sha256:dfdcf562588ea62f3096b1dc93d0f0002415550ecb648bb58adb57638a9f4b3f 27.57MB / 27.57MB                                                                                       8.2s
+ => => extracting sha256:68b64c51cda3d04397bcf5742a29a9a1ba7adcfd18a376bacb8d114ed64cbd5a                                                                                              0.7s
+ => => sha256:64f80e889e0dfb8281f8b3aadf68518c050ab88af0a15f43523c71cff6f9c42c 248B / 248B                                                                                             7.1s
+ => => extracting sha256:ec935196e6a095bdd6ac865248321ea4fd33424071fe14264cd33900f8ae6212                                                                                              2.4s
+ => => extracting sha256:d74736caedd40737be802d27bfe1d5d0e10377ddb1c7b4103391e0bbff5152e0                                                                                              6.4s
+ => => extracting sha256:dd4663c0efc39e4301854b842a573355e5a2e8a1c03af208943aa6fbc5550b56                                                                                              0.2s
+ => => extracting sha256:dfdcf562588ea62f3096b1dc93d0f0002415550ecb648bb58adb57638a9f4b3f                                                                                              0.6s
+ => => extracting sha256:64f80e889e0dfb8281f8b3aadf68518c050ab88af0a15f43523c71cff6f9c42c                                                                                              0.0s
+ => [internal] load build context                                                                                                                                                      0.1s
+ => => transferring context: 8.77kB                                                                                                                                                    0.0s
+ => [2/6] WORKDIR app/                                                                                                                                                                 1.4s
+ => [3/6] RUN python -m venv app/venv                                                                                                                                                  3.1s
+ => [4/6] COPY requirements.txt .                                                                                                                                                      0.1s
+ => [5/6] RUN pip install --no-cache -r requirements.txt                                                                                                                               3.4s
+ => [6/6] COPY . .                                                                                                                                                                     0.1s
+ => exporting to image                                                                                                                                                                 0.3s
+ => => exporting layers                                                                                                                                                                0.3s
+ => => writing image sha256:bc0190d8159c8d3fccc7e1c88d78e1ddfb4dd21f04fe5faf90aa5be0f0f5f479                                                                                           0.0s
+ => => naming to docker.io/library/diacinco
+
+
+Reutilizando a imagem, mudando apenas o arquivo main.py:
+docker build -t diacinco .
+[+] Building 1.5s (11/11) FINISHED                                                                                                                                           docker:default
+ => [internal] load build definition from Dockerfile                                                                                                                                   0.0s
+ => => transferring dockerfile: 208B                                                                                                                                                   0.0s
+ => [internal] load metadata for docker.io/library/python:3.13                                                                                                                         1.1s
+ => [internal] load .dockerignore                                                                                                                                                      0.0s
+ => => transferring context: 2B                                                                                                                                                        0.0s
+ => [1/6] FROM docker.io/library/python:3.13@sha256:36f5673ec01bd1001d7cbb8f12215101aa4ee5d70ddbbb72e01b2930d7c12f19                                                                   0.0s
+ => [internal] load build context                                                                                                                                                      0.0s
+ => => transferring context: 1.14kB                                                                                                                                                    0.0s
+ => CACHED [2/6] WORKDIR app/                                                                                                                                                          0.0s
+ => CACHED [3/6] RUN python -m venv app/venv                                                                                                                                           0.0s
+ => CACHED [4/6] COPY requirements.txt .                                                                                                                                               0.0s
+ => CACHED [5/6] RUN pip install --no-cache -r requirements.txt                                                                                                                        0.0s
+ => [6/6] COPY . .                                                                                                                                                                     0.1s
+ => exporting to image                                                                                                                                                                 0.1s
+ => => exporting layers                                                                                                                                                                0.1s
+ => => writing image sha256:85fb38ccc1aeb59d6642870290c308df6b4379ac2375b35ca1042291480223e4                                                                                           0.0s
+ => => naming to docker.io/library/diacinco                                                                                                                                            0.0s
+
+
+Na primeira vez que rodei o container foi contruido do zero, na segunda vez eu mudei apenas algumas linhas do main.py
+no momento que eu reconstruir a imagem ela usou o cache da construção e a unica mudança foi no ultimo COPY
+ => CACHED [2/6] WORKDIR app/                                                                                                                                                          0.0s
+ => CACHED [3/6] RUN python -m venv app/venv                                                                                                                                           0.0s
+ => CACHED [4/6] COPY requirements.txt .                                                                                                                                               0.0s
+ => CACHED [5/6] RUN pip install --no-cache -r requirements.txt
+A mudança:
+ => [6/6] COPY . .
+
+As mudanças são em cascatas, se houvesse alguma mudança nas camadas superiores todas que vem posterior a ela sofreria mudança.
+
+Por isso, uma boa organização normalmente coloca primeiro aquilo que muda com menor frequência e depois aquilo que muda constantemente.
+Dependências
+     ↓
+Instalação
+     ↓
+Código da aplicação
+
+
+O que invalida o cache?
+Uma etapa pode deixar de ser reutilizável quando alguma informação relevante para aquela etapa muda. Um exemplo simples é justamente o COPY.
+Se temos:
+- COPY requirements.txt .
+e modificamos o conteúdo de requirements.txt, o Docker percebe que aquela etapa não representa mais o mesmo estado que havia sido construído anteriormente.
+Portanto, ela precisa ser reconstruída.
+E isso gera uma consequência importante: quando uma etapa precisa ser reconstruída, as etapas posteriores também podem precisar ser reconstruídas.
+
+
+Podemos pensar:
+    Imagem tradicional
+        ████████████████████████
+    Slim
+        ██████████████
+    Alpine
+        ████████
+
+Slim vs Alpine
+
+Eu gosto de pensar nessa decisão desta maneira:
+
+                 Preciso de uma imagem menor?
+                           │
+                           ▼
+                         Sim
+                           │
+              ┌────────────┴────────────┐
+              │                         │
+              ▼                         ▼
+            Slim                     Alpine
+              │                         │
+      Mais compatibilidade       Mais minimalista
+              │                         │
+      Menos surpresas            Mais diferenças
+              │                         │
+              └────────────┬────────────┘
+                           │
+                           ▼
+                   Testar a aplicação
+
+Para uma aplicação Python comum, python:3.13-slim é frequentemente um excelente ponto de partida.
+
+
+Multi Stage
+ um recurso nativo do Docker que permite organizar o processo de construção da imagem em várias etapas, isolando fases como compilação, testes e empacotamento.
+
+Stage 1
+builder
+    │
+    │ compila
+    ▼
+   app
+    │
+    │ COPY --from=builder
+    ▼
+Stage 2
+runtime
+    │
+    ▼
+aplicação executando
+
+Um artefato é simplesmente o resultado produzido durante o processo de construção que será utilizado posteriormente.
+A imagem final não precisa carregar o código-fonte, o compilador e todas as ferramentas utilizadas para gerar o binário.
+
+CONSTRUÇÃO
+                    │
+                    ▼
+          "Como produzo minha aplicação?"
+                    │
+                    ▼
+        compiladores / ferramentas /
+          dependências de build
+                    │
+                    ▼
+                 ARTEFATO
+                    │
+                    ▼
+                 EXECUÇÃO
+                    │
+                    ▼
+          "O que preciso para rodá-la?"
+                    │
+                    ▼
+             runtime + aplicação
+
+Imagine uma fábrica de móveis.
+Você precisa de:
+- serra
+- furadeira
+- martelo
+- máquinas
+- matéria-prima
+
+para fabricar uma mesa.
+Mas quando a mesa está pronta, você não precisa colocar:
+- serra
+- furadeira
+- martelo
+dentro da casa do cliente.
+Você entrega: mesa
+
+A fábrica é o builder.
+A mesa é o artefato.
+
+
+Aqui existe uma conexão importante com o que você estudou anteriormente.
+Você já aprendeu que uma imagem é formada por camadas.
+Com Multi-stage, existem múltiplas etapas de construção, mas a imagem final não precisa carregar todas as camadas produzidas pelo estágio de build.
+
+
+ETAPAS:
+IMAGE                ID             DISK USAGE   CONTENT SIZE
+multi-stage:latest   b9d94767c8cd       10.6MB             0B
+
+[+] Building 23.5s (13/13) FINISHED                                                                                   docker:default
+ => [internal] load build definition from Dockerfile                                                                            0.0s
+ => => transferring dockerfile: 207B                                                                                            0.0s
+ => [internal] load metadata for docker.io/library/alpine:latest                                                                0.3s
+ => [internal] load metadata for docker.io/library/golang:1.24                                                                  0.3s
+ => [internal] load .dockerignore                                                                                               0.0s
+ => => transferring context: 2B                                                                                                 0.0s
+ => [builder 1/4] FROM docker.io/library/golang:1.24@sha256:d2d2bc1c84f7e60d7d2438a3836ae7d0c847f4888464e7ec9ba3a1339a1ee804   18.9s
+ => => resolve docker.io/library/golang:1.24@sha256:d2d2bc1c84f7e60d7d2438a3836ae7d0c847f4888464e7ec9ba3a1339a1ee804            0.0s
+ => => sha256:d2d2bc1c84f7e60d7d2438a3836ae7d0c847f4888464e7ec9ba3a1339a1ee804 9.70kB / 9.70kB                                  0.0s
+ => => sha256:46fdd02b6cbcd624a4087ea298e4c8505e5d400c4ee5181e4dd06e2297d647ae 2.32kB / 2.32kB                                  0.0s
+ => => sha256:00925efecb9c93b3208f48a9e8ae8b1d426be1fff78baf2fc9d394d198fe9fc8 3.05kB / 3.05kB                                  0.0s
+ => => sha256:ef235bf1a09a237b896b69935c8c8d917c9c6a78b538724911414afc0a96763c 49.29MB / 49.29MB                                5.0s
+ => => sha256:954d6059ca7bdbb9ceb566ca2239e01ef312165659d656753d7dbace7771a591 25.61MB / 25.61MB                                1.9s
+ => => sha256:b5e2021c4c8bd1a46b34d9608a9381afdc333600ee1ef3c94306ecf7373e1956 67.79MB / 67.79MB                                5.0s
+ => => sha256:b2b04fcbed4bf6e5373e2607d2705704ec5b220f1d1306e06ab8fe9471b2f86a 102.14MB / 102.14MB                              7.6s
+ => => extracting sha256:ef235bf1a09a237b896b69935c8c8d917c9c6a78b538724911414afc0a96763c                                       1.8s
+ => => sha256:f7bdfd728ac2ad72d43b82689890dc698260d3a1049845f48fb3fb942df6c581 79.13MB / 79.13MB                                8.5s
+ => => sha256:50a27cd32f8983e7e43777ec65195fb6594ea877f31993fd555513c261ffc054 126B / 126B                                      5.2s
+ => => sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1 32B / 32B                                        5.4s
+ => => extracting sha256:954d6059ca7bdbb9ceb566ca2239e01ef312165659d656753d7dbace7771a591                                       0.7s
+ => => extracting sha256:b5e2021c4c8bd1a46b34d9608a9381afdc333600ee1ef3c94306ecf7373e1956                                       2.2s
+ => => extracting sha256:b2b04fcbed4bf6e5373e2607d2705704ec5b220f1d1306e06ab8fe9471b2f86a                                       2.2s
+ => => extracting sha256:f7bdfd728ac2ad72d43b82689890dc698260d3a1049845f48fb3fb942df6c581                                       4.3s
+ => => extracting sha256:50a27cd32f8983e7e43777ec65195fb6594ea877f31993fd555513c261ffc054                                       0.0s
+ => => extracting sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1                                       0.0s
+ => [internal] load build context                                                                                               0.0s
+ => => transferring context: 28B                                                                                                0.0s
+ => [stage-1 1/3] FROM docker.io/library/alpine:latest@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b  0.0s
+ => CACHED [stage-1 2/3] WORKDIR /app                                                                                           0.0s
+ => [builder 2/4] WORKDIR /app                                                                                                  0.5s
+ => [builder 3/4] COPY main.go .                                                                                                0.1s
+ => [builder 4/4] RUN go build -o app main.go                                                                                   3.3s
+ => [stage-1 3/3] COPY --from=builder /app/app .                                                                                0.1s
+ => exporting to image                                                                                                          0.1s
+ => => exporting layers                                                                                                         0.1s
+ => => writing image sha256:b9d94767c8cd1ab798bd750b1634c9f9b9ecb3d26a25820d64396fa2f1bddcc3                                    0.0s
+ => => naming to docker.io/library/multi-stage                                                                                  0.0s
+
+
+ 
